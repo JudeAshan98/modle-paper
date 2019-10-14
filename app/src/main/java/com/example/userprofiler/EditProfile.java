@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -23,6 +24,7 @@ public class EditProfile extends AppCompatActivity {
     EditText user_et,dob_et,pw_et,id;
     Button search_btn,update_btn,Delete_btn;
     RadioGroup Gender;
+    RadioButton maleb,femaleb;
 
 
     @Override
@@ -42,6 +44,8 @@ public class EditProfile extends AppCompatActivity {
         id =(EditText)findViewById(R.id.id);
         Delete_btn =(Button)findViewById(R.id.Delete_btn);
         id.setVisibility(View.INVISIBLE);
+        maleb=(RadioButton)findViewById(R.id.male);
+        femaleb=(RadioButton)findViewById(R.id.female);
         Searchdata();
         updateUser();
         deletedata();
@@ -62,6 +66,17 @@ public class EditProfile extends AppCompatActivity {
                     while(res.moveToNext()){
                         id.setText(res.getString(0));
                         dob_et.setText(res.getString(2));
+
+                        String gender1 = res.getString(3);
+                        Log.d(gender1,"id");
+                        if (gender1 == "Female") {
+                        //    RadioButton male = findViewById(R.id.male);
+                            femaleb.setChecked(true);
+                        } else {
+                          //  RadioButton female = findViewById(R.id.female);
+                            Log.d(gender1,"i7d");
+                            maleb.setChecked(true);
+                        }
                   //      Gender.getCheckedRadioButtonId(res.getColumnIndex(3););
                         pw_et.setText(res.getString(4));
                     }
